@@ -1,0 +1,23 @@
+{
+	"main": "dist/index.js",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/react": "^16.8"
+	},
+	"peerDependencies": {
+		"framer": "^1.0",
+		"react": "^16.8"
+	},
+	"framer": {
+		"id": "f3c5d8ee-97d6-4d9d-ba40-adf1c8340500",
+		"displayName": "3D Terrain"
+	},
+	"author": "Emil Widlund",
+	"dependencies": {
+		"@mapbox/tilebelt": "^1.0.1",
+		"lodash": "^4.17.14",
+		"three": "^0.106.2"
+	},
+	"name": "@framer/ewidlund.3d-terrain",
+	"version": "1.0.0"
+}
