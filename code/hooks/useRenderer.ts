@@ -34,8 +34,8 @@ export const useRenderer = (props: FrameProps) => {
         ref.current.appendChild(_renderer.domElement)
 
         const _scene = new Scene()
-        _scene.fog = new Fog(0xaaaaaa, 200, 8000)
-        _scene.background = new Color(0xaaaaaa)
+        _scene.fog = new Fog(0xaaaacc, 2000, 6000)
+        _scene.background = new Color(0xaaaacc)
 
         const _camera = new PerspectiveCamera(
             35,
@@ -47,8 +47,6 @@ export const useRenderer = (props: FrameProps) => {
         _camera.lookAt(new Vector3(0, 0, 0))
 
         const _orbitControls = new OrbitControls(_camera, _renderer.domElement)
-        // _orbitControls.autoRotate = true
-        // _orbitControls.autoRotateSpeed = 0.2
         _orbitControls.enableDamping = true
         _orbitControls.dampingFactor = 0.3
 

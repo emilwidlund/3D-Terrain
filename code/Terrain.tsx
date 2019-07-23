@@ -41,7 +41,7 @@ export const Terrain = (props: TerrainProps) => {
         )
     }
 
-    const [dirLight, setDirLight] = React.useState<THREE.DirectionalLight>()
+    const [mainLight, setMainLight] = React.useState<THREE.PointLight>()
     const [terrain, setTerrain] = React.useState<THREE.Group>()
 
     const { ref, renderer, scene, camera, orbitControls } = useRenderer(props)
@@ -52,13 +52,13 @@ export const Terrain = (props: TerrainProps) => {
 
     React.useEffect(() => {
         if (scene) {
-            const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.3)
+            const hemiLight = new THREE.HemisphereLight(0xffffff, 0xaaaaaa, 0.3)
             hemiLight.color.setHSL(0.6, 1, 0.6)
             hemiLight.groundColor.setHSL(0.095, 1, 0.75)
             hemiLight.position.set(0, 50, 0)
             scene.add(hemiLight)
 
-            const light = new THREE.DirectionalLight(0xffffff, 0.6)
+            const light = new THREE.PointLight(0xffffff, 0.7)
             light.color.setHSL(0.1, 1, 0.95)
             light.castShadow = true
             scene.add(light)
@@ -73,12 +73,8 @@ export const Terrain = (props: TerrainProps) => {
             light.shadow.mapSize.height = 2048
             light.shadow.camera.far = 20000
             light.shadow.camera.near = 0.1
-            light.shadow.camera.top = 1000
-            light.shadow.camera.right = 1000
-            light.shadow.camera.bottom = -1000
-            light.shadow.camera.left = -1000
 
-            setDirLight(light)
+            setMainLight(light)
 
             const l = new THREE.DirectionalLight(0xffffff, 0.2)
             l.color.setHSL(0.1, 1, 0.95)
@@ -89,8 +85,8 @@ export const Terrain = (props: TerrainProps) => {
                 new THREE.BoxGeometry(10000, 1, 10000),
                 new THREE.MeshStandardMaterial({
                     roughness: 0.6,
-                    color: 0xaaaaaa,
-                    metalness: 0.2,
+                    color: 0xffffff,
+                    metalness: 0.1,
                     bumpScale: 0.0005,
                 })
             )
@@ -124,8 +120,8 @@ export const Terrain = (props: TerrainProps) => {
     }, [scene])
 
     React.useEffect(() => {
-        if (scene && dirLight) {
-            dirLight.position.set(
+        if (scene && mainLight) {
+            mainLight.position.set(
                 Math.cos(props.lightPosition * 0.02) * 1000,
                 1500,
                 Math.sin(props.lightPosition * 0.02) * 1000

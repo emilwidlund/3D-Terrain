@@ -22,7 +22,7 @@ export class Terrain {
     tileSize: number
     size: number
     zoom: number
-    terrains: THREE.Mesh[]
+    terrain: THREE.Group
 
     textureLoader: THREE.TextureLoader
 
@@ -108,6 +108,8 @@ export class Terrain {
 
         this.repositionTerrain(group)
 
+        this.terrain = group
+
         cb(group)
     }
 
@@ -176,10 +178,8 @@ export class Terrain {
             return geometry
         }
 
-        const planeMaterial = new THREE.MeshStandardMaterial({
-            roughness: 0.6,
-            color: 0xaaaaaa,
-            metalness: 0.2,
+        const planeMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
             bumpScale: 0.0005,
             side: THREE.DoubleSide,
         })
@@ -194,7 +194,7 @@ export class Terrain {
 
         const planeTopMesh = new THREE.Mesh(planeTopGeometry, planeMaterial)
         planeTopMesh.castShadow = true
-        planeTopMesh.position.y = 256 / 2
+        planeTopMesh.position.y = this.tileSize / 2
         planeTopMesh.rotation.set(THREE.Math.degToRad(90), 0, 0)
         mesh.add(planeTopMesh)
 
@@ -202,7 +202,7 @@ export class Terrain {
 
         const planeBottomGeometry = buildPlaneGeometry((i: number) => {
             return transform(
-                elevationData[elevationData.length - 256 + i],
+                elevationData[elevationData.length - this.tileSize + i],
                 threshold,
                 [0, 200],
                 {
@@ -216,7 +216,7 @@ export class Terrain {
             planeMaterial
         )
         planeBottomMesh.castShadow = true
-        planeBottomMesh.position.y = -256 / 2
+        planeBottomMesh.position.y = -this.tileSize / 2
         planeBottomMesh.rotation.set(THREE.Math.degToRad(90), 0, 0)
         mesh.add(planeBottomMesh)
 
@@ -224,7 +224,10 @@ export class Terrain {
 
         const planeRightGeometry = buildPlaneGeometry((i: number) => {
             return transform(
-                elevationData[(i % elevationData.length) * 256 + 255],
+                elevationData[
+                    (i % elevationData.length) * this.tileSize +
+                        (this.tileSize - 1)
+                ],
                 threshold,
                 [0, 200],
                 {
@@ -235,7 +238,7 @@ export class Terrain {
 
         const planeRightMesh = new THREE.Mesh(planeRightGeometry, planeMaterial)
         planeRightMesh.castShadow = true
-        planeRightMesh.position.x = 256 / 2
+        planeRightMesh.position.x = this.tileSize / 2
         planeRightMesh.rotation.set(
             THREE.Math.degToRad(90),
             THREE.Math.degToRad(-90),
@@ -247,7 +250,7 @@ export class Terrain {
 
         const planeLeftGeometry = buildPlaneGeometry((i: number) => {
             return transform(
-                elevationData[(i % elevationData.length) * 256],
+                elevationData[(i % elevationData.length) * this.tileSize],
                 threshold,
                 [0, 200],
                 {
@@ -258,7 +261,7 @@ export class Terrain {
 
         const planeLeftMesh = new THREE.Mesh(planeLeftGeometry, planeMaterial)
         planeLeftMesh.castShadow = true
-        planeLeftMesh.position.x = -256 / 2
+        planeLeftMesh.position.x = -this.tileSize / 2
         planeLeftMesh.rotation.set(
             THREE.Math.degToRad(90),
             THREE.Math.degToRad(-90),
