@@ -30,7 +30,7 @@ lodash@^4.17.14:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
   integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
 
-three@^0.106.2:
-  version "0.106.2"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.106.2.tgz#6752d304c470e4df230944ecd45325e7bf79e1f8"
-  integrity sha512-4Tlx43uoxnIaZFW2Bzkd1rXsatvVHEWAZJy8LuE+s6Q8c66ogNnhfq1bHiBKPAnXP230LD11H/ScIZc2LZMviA==
+three@^0.125.0:
+  version "0.125.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.125.0.tgz#19e922b9dc51ad0b706893aeee888de68e99850a"
+  integrity sha512-qL36qUGsPQ/Ofo/RZdXwHwM7A8wzUSAIyawtjIebJSPvounUQeneSqxI0aBY2iwKpseGy+RUtj3C5f/z4poyXw==
