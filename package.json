@@ -15,7 +15,7 @@
 	"author": "Emil Widlund",
 	"dependencies": {
 		"@mapbox/tilebelt": "^1.0.1",
-		"lodash": "^4.17.14",
+		"lodash": "^4.17.21",
 		"three": "^0.106.2"
 	},
 	"name": "@framer/ewidlund.3d-terrain",
